@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "lint": "npx eslint .",
+    "eslint:fix": "npm run lint -- --fix",
     "test": "babel-node test1.js",
     "database": "nodemon --exec babel-node src/modal/CreateDatabase.js",
     "database:trx": "nodemon --exec babel-node schema/trx_hash.js",
