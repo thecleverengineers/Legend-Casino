@@ -31,6 +31,21 @@ cronJobController.cronJobGame1p(io);
 // Check xem ai connect vào sever
 socketIoController.sendMessageAdmin(io);
 
+// Add global error handling middleware to gracefully handle unexpected errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  return res.status(500).json({ success: false, message: "Internal Server Error" });
+});
+
+// Attach listeners for unforeseen errors to avoid server crash
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
 // app.all('*', (req, res) => {
 //     return res.render("404.ejs");
 // });
